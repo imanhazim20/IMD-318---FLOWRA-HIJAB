@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Flowra Hijab</title>
+ 
+  <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+        }
+
+        input[type="text"],
+        select,
+        .btn {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #47c9a2;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .col-50 {
+            flex: 1;
+            min-width: 290px;
+        }
+
+        .payment-section {
+            border-left: 2px solid #f0f0f0;
+            padding-left: 30px;
+            margin-top: 30px;
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .select-box {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn {
+            background-color: #47c9a2;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3bb08c;
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            font-size: 16px;
+            text-align: center;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        .card-footer a {
+            color: #47c9a2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-error {
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        .order-summary {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .order-summary .order-item {
+            margin-bottom: 15px;
+        }
+
+        .order-summary .order-item .item-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .order-summary .order-item .item-price {
+            font-weight: bold;
+            color: #47c9a2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Checkout Form</h2>
+        <form id="checkoutForm">
+
+            <div class="order-summary">
+                <div class="card-header">Order Summary</div>
+                <div id="orderItems"></div>
+                <div class="order-item" style="border-top: 1px solid #ddd; padding-top: 10px;">
+                    <div class="item-title" style="font-weight: 600;">Total</div>
+                    <div id="totalPrice" class="item-price" style="font-weight: bold; color: #333;"></div>
+                </div>
+            </div>
+
+            <div class="form-title">Billing Address</div>
+            <div class="row">
+                <div class="col-50">
+                    <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Muhammad Iman Hazim Bin Noor Izam" required>
+
+                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                    <input type="text" id="email" name="email" placeholder="imanhazim@example.com" required>
+
+                    <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                    <input type="text" id="adr" name="address" placeholder="288B, Bedong, Kedah" required>
+
+                    <label for="city"><i class="fa fa-institution"></i> City</label>
+                    <input type="text" id="city" name="city" placeholder="Sungai Petani" required>
+
+                    <div class="row">
+                        <div class="col-50">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" placeholder="Kedah" required>
+                        </div>
+                        <div class="col-50">
+                            <label for="postcode">Postcode</label>
+                            <input type="text" id="postcode" name="postcode" placeholder="10001" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-section">
+                <div class="form-title">Payment</div>
+                <label for="paymentOption" class="select-box">Choose Payment Option</label>
+                <select id="paymentOption" name="paymentOption" required>
+                    <option value="">-- Select Payment Option --</option>
+                    <option value="fpx">FPX</option>
+                    <option value="cod">Cash on Delivery</option>
+                </select>
+
+                <div id="fpxOptions" class="hidden">
+                    <label for="bank" class="select-box">Choose FPX Bank</label>
+                    <select id="bank" name="bank">
+                        <option value="">-- Select Bank --</option>
+                        <option value="maybank">Maybank</option>
+                        <option value="cimb">CIMB</option>
+                        <option value="toyyibpay">ToyyibPay</option>
+                        <option value="rhb">RHB</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        const cart = [
+            { name: "Amora Hijab", price: 32.00 },
+            { name: "Aurelia Hijab", price: 29.00 },
+            { name: "Aviana Hijab", price: 29.00 }
+        ];
+
+        function updateOrderSummary() {
+            let orderItemsContainer = document.getElementById('orderItems');
+            let totalPriceContainer = document.getElementById('totalPrice');
+            let totalPrice = 0;
+
+            orderItemsContainer.innerHTML = '';
+
+            cart.forEach(item => {
+                let itemElement = document.createElement('div');
+                itemElement.classList.add('order-item');
+                itemElement.innerHTML = `
+                    <div class="item-title">${item.name}</div>
+                    <div class="item-price">RM ${item.price.toFixed(2)}</div>
+                `;
+                orderItemsContainer.appendChild(itemElement);
+                totalPrice += item.price;
+            });
+
+            totalPriceContainer.innerHTML = `RM ${totalPrice.toFixed(2)}`;
+        }
+
+        updateOrderSummary();
+
+        const paymentOption = document.getElementById('paymentOption');
+        const fpxOptions = document.getElementById('fpxOptions');
+        const bankSelect = document.getElementById('bank');
+
+        paymentOption.addEventListener('change', () => {
+            if (paymentOption.value === 'fpx') {
+                fpxOptions.classList.remove('hidden');
+                bankSelect.required = true;
+            } else {
+                fpxOptions.classList.add('hidden');
+                bankSelect.required = false;
+            }
+        });
+
+        document.getElementById('checkoutForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const paymentMethod = paymentOption.value;
+            if (!paymentMethod) {
+                alert("Please select a payment method.");
+                return;
+            }
+
+            if (paymentMethod === 'fpx' && !bankSelect.value) {
+                alert("Please select a bank for FPX payment.");
+                return;
+            }
+
+            const orderData = {
+                orderId: Math.floor(Math.random() * 9000000) + 1000000,
+                orderDate: new Date().toISOString(),
+                paymentMethod,
+                bank: paymentMethod === 'fpx' ? bankSelect.value : null,
+                shippingDetails: {
+                    firstName: document.getElementById('fname').value,
+                    email: document.getElementById('email').value,
+                    address1: document.getElementById('adr').value,
+                    city: document.getElementById('city').value,
+                    state: document.getElementById('state').value,
+                    zipCode: document.getElementById('postcode').value,
+                },
+            };
+
+            localStorage.setItem('lastOrder', JSON.stringify(orderData));
+            window.location.href = "sucess.html";
+        });
+    </script>
+</body>
+
+</html>
